@@ -1,4 +1,3 @@
-using CoreRepository.Classes;
 using CoreRepository.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 

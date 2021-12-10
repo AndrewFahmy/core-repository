@@ -5,7 +5,7 @@ using CoreRepository.Interfaces;
 using CoreRepository.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoreRepository.Classes
+namespace CoreRepository
 {
     public class RawRepository<TDbContext> : IRawRepository<TDbContext>
         where TDbContext : DbContext

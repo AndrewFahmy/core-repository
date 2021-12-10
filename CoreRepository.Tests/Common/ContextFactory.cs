@@ -1,6 +1,7 @@
 using System;
 using CoreRepository.Tests.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace CoreRepository.Tests.Common
 {
@@ -9,7 +10,9 @@ namespace CoreRepository.Tests.Common
         public static InMemContext CreateContext()
         {
             var options = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+                .Options;
 
             var context = new InMemContext(options);
 

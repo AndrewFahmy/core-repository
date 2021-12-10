@@ -8,7 +8,7 @@ using CoreRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CoreRepository.Classes
+namespace CoreRepository
 {
     public class TransactionRepository<T, TDbContext> : ITransactionRepository<T, TDbContext>
         where T : class, new()
@@ -52,8 +52,7 @@ namespace CoreRepository.Classes
 
         public void Dispose()
         {
-            _transaction?.Rollback();
-            _transaction.Dispose();
+            _transaction?.Dispose();
         }
 
         public bool Exists(Expression<Func<T, bool>> predicate = null)
