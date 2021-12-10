@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Andrew Fahmy</Authors>
-    <Description>A simple generic repository that works with all .net core versions and .net 6+</Description>
+    <Description>A simple generic repository that works with .net 5+</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/AndrewFahmy/core-repository</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AndrewFahmy/core-repository</RepositoryUrl>
