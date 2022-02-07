@@ -9,6 +9,7 @@
     <RepositoryUrl>https://github.com/AndrewFahmy/framework-repository</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>entity framework repository .net dotnet</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
