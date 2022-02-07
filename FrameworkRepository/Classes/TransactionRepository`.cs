@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using FrameworkRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -48,11 +46,6 @@ namespace FrameworkRepository
         public void Delete(T model)
         {
             _context.Set<T>().Remove(model);
-        }
-
-        public void Dispose()
-        {
-            _transaction?.Dispose();
         }
 
         public bool Exists(Expression<Func<T, bool>> predicate = null)
