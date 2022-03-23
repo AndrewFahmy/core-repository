@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using FrameworkRepository.Helpers;
 using FrameworkRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,8 +20,11 @@ namespace FrameworkRepository
         }
 
 
-        public void BulkDelete(IEnumerable<T> models)
+        public void BulkDelete(IEnumerable<T> models, Func<T, bool> detachListPredicate = null)
         {
+            if (detachListPredicate != null)
+                _context.DetachList(detachListPredicate);
+
             _context.Set<T>().RemoveRange(models);
 
             _context.SaveChanges();
@@ -35,6 +39,9 @@ namespace FrameworkRepository
 
         public void BulkUpdate(IEnumerable<T> models, Func<T, bool> detachListPredicate = null)
         {
+            if (detachListPredicate != null)
+                _context.DetachList(detachListPredicate);
+
             _context.Set<T>().UpdateRange(models);
 
             _context.SaveChanges();
@@ -45,8 +52,11 @@ namespace FrameworkRepository
             return _context.Set<T>().LongCount(predicate ?? (p => true));
         }
 
-        public void Delete(T model)
+        public void Delete(T model, Func<T, bool> detachPredicate = null)
         {
+            if (detachPredicate != null)
+                _context.DetachLocal(detachPredicate);
+
             _context.Set<T>().Remove(model);
 
             _context.SaveChanges();
@@ -83,6 +93,9 @@ namespace FrameworkRepository
 
         public void Update(T model, Func<T, bool> detachPredicate = null)
         {
+            if (detachPredicate != null)
+                _context.DetachLocal(detachPredicate);
+
             _context.Set<T>().Update(model);
 
             _context.SaveChanges();

@@ -16,8 +16,8 @@ namespace FrameworkRepository.Interfaces
 
         void BulkUpdate(IEnumerable<T> models, Func<T, bool> detachListPredicate = null);
 
-        void Delete(T model);
+        void Delete(T model, Func<T, bool> detachPredicate = null);
 
-        void BulkDelete(IEnumerable<T> models);
+        void BulkDelete(IEnumerable<T> models, Func<T, bool> detachListPredicate = null);
     }
 }
