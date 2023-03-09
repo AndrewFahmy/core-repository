@@ -110,16 +110,8 @@ namespace FrameworkRepository.Helpers
                 cmd.CommandType = CommandType.Text;
                 var parameterNames = cmd.AddParameters(parameters);
 
-                if (parameterNames.All(a => a == null))
-                {
-                    cmd.CommandText = command.Split(' ').FirstOrDefault();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                }
-                else
-                {
-                    cmd.CommandText = string.Format(command, parameterNames);
-                    cmd.CommandType = CommandType.Text;
-                }
+                cmd.CommandText = string.Format(command, parameterNames);
+                cmd.CommandType = CommandType.Text;
 
                 con.CheckConnectionState().Wait();
 
