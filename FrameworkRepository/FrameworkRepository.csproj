@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Authors>Andrew Fahmy</Authors>
-    <Description>A simple generic repository that works with .net entity framework 5+</Description>
+    <Description>A simple generic repository that works with .net entity framework</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/AndrewFahmy/framework-repository</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AndrewFahmy/framework-repository</RepositoryUrl>
