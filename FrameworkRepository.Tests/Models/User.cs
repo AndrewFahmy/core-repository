@@ -1,8 +1,10 @@
+﻿#pragma warning disable IDE0073
+
 using System.Collections.Generic;
 
 namespace FrameworkRepository.Tests.Models
 {
-    public class User
+    internal class User
     {
         public int Id { get; set; }
 

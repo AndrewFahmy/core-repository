@@ -1,3 +1,5 @@
+﻿#pragma warning disable IDE0073
+
 using System.Collections.Generic;
 using System.Linq;
 using FrameworkRepository.Tests.Common;
@@ -7,7 +9,7 @@ using NUnit.Framework;
 namespace FrameworkRepository.Tests
 {
     [TestFixture]
-    public class RepositoryTests
+    internal class RepositoryTests
     {
         private InMemContext _context = null!;
 
@@ -104,7 +106,7 @@ namespace FrameworkRepository.Tests
             CollectionAssert.AreEquivalent(new[] { 6, 7, 8 }, products.Select(p => p.Id));
             Assert.That(products.All(p => p.Price == 5000));
         }
-        
+
         [Test]
         public void Should_DeleteProduct_When_UsingDeleteOnProductObject()
         {

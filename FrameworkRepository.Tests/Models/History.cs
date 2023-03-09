@@ -1,8 +1,12 @@
+﻿#pragma warning disable IDE0073
+
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+
+
 namespace FrameworkRepository.Tests.Models
 {
-    public class History
+    internal class History
     {
         public int UserId { get; set; }
 

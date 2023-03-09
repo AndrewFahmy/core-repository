@@ -1,12 +1,14 @@
+﻿#pragma warning disable IDE0073
+
 using System;
 using FrameworkRepository.Tests.Common;
 using FrameworkRepository.Tests.Models;
 using NUnit.Framework;
 
-namespace FrameworkRepository.Tests.TestClasses
+namespace FrameworkRepository.Tests
 {
     [TestFixture]
-    public class TransactionRepositoryTests
+    internal class TransactionRepositoryTests
     {
         private InMemContext _context = null!;
 
@@ -31,7 +33,7 @@ namespace FrameworkRepository.Tests.TestClasses
             historyRepo.SaveChanges();
 
             var historyItem = historyRepo.GetFirstOrDefault(p => p.UserId == 1);
-            
+
             //assert
             Assert.NotNull(historyItem);
             Assert.AreEqual(historyItem.UserId, 1);
@@ -51,8 +53,8 @@ namespace FrameworkRepository.Tests.TestClasses
             //act
             historyRepo.Insert(new History { UserId = 1, ProductId = 1, Price = 2.50, CreationDate = DateTime.Now });
 
-            var historyItem = historyRepo.GetFirstOrDefault(p => p.UserId == 1);            
-            
+            var historyItem = historyRepo.GetFirstOrDefault(p => p.UserId == 1);
+
             //assert
             Assert.Null(historyItem);
         }

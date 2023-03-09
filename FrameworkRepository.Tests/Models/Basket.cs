@@ -1,11 +1,13 @@
+﻿#pragma warning disable IDE0073
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FrameworkRepository.Tests.Models
 {
-    public class Basket
+    internal class Basket
     {
         public int UserId { get; set; }
-        
+
         public int ProductId { get; set; }
 
 

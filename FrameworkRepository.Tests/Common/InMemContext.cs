@@ -1,9 +1,11 @@
+﻿#pragma warning disable IDE0073
+
 using FrameworkRepository.Tests.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrameworkRepository.Tests.Common
 {
-    public class InMemContext : DbContext
+    internal class InMemContext : DbContext
     {
         public InMemContext(DbContextOptions options) : base(options) { }
 

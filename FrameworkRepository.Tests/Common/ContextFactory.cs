@@ -1,3 +1,5 @@
+﻿#pragma warning disable IDE0073
+
 using System;
 using FrameworkRepository.Tests.Models;
 using Microsoft.EntityFrameworkCore;
@@ -5,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace FrameworkRepository.Tests.Common
 {
-    public static class ContextFactory
+    internal static class ContextFactory
     {
         public static InMemContext CreateContext()
         {

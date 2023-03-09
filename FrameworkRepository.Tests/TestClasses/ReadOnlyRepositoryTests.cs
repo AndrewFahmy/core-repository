@@ -1,3 +1,5 @@
+﻿#pragma warning disable IDE0073
+
 using System.Linq;
 using FrameworkRepository.Tests.Common;
 using FrameworkRepository.Tests.Models;
@@ -6,7 +8,7 @@ using NUnit.Framework;
 namespace FrameworkRepository.Tests
 {
     [TestFixture]
-    public class ReadOnlyRepositoryTests
+    internal class ReadOnlyRepositoryTests
     {
         private InMemContext _context = null!;
 
