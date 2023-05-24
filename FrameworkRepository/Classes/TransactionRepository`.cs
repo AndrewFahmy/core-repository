@@ -94,8 +94,6 @@ namespace FrameworkRepository
 
         public void SaveChanges()
         {
-            _transaction?.Commit();
-
             _context.SaveChanges();
         }
 

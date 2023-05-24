@@ -22,15 +22,15 @@ namespace FrameworkRepository.Tests
         public void Should_ReturnUserObject_When_SearchingByID()
         {
             //arrange
-            const int id = 1;
+            const int Id = 1;
             var repo = new ReadOnlyRepository<User, InMemContext>(_context);
 
             //act
-            var user = repo.GetFirstOrDefault(p => p.Id == id);
+            var user = repo.GetFirstOrDefault(p => p.Id == Id);
 
             //assert
             Assert.NotNull(user);
-            Assert.AreEqual(user.Id, id);
+            Assert.AreEqual(user.Id, Id);
             Assert.AreEqual(user.FirstName, "Andrew");
         }
 
@@ -38,18 +38,18 @@ namespace FrameworkRepository.Tests
         public void Should_ReturnNull_When_SearchingByID()
         {
             //arrange
-            const int id = 20;
+            const int Id = 20;
             var repo = new ReadOnlyRepository<User, InMemContext>(_context);
 
             //act
-            var user = repo.GetFirstOrDefault(p => p.Id == id);
+            var user = repo.GetFirstOrDefault(p => p.Id == Id);
 
             //assert
             Assert.Null(user);
         }
 
         [Test]
-        public void Should_ReturnAllUsers_When_SelectingDataWithouFilter()
+        public void Should_ReturnAllUsers_When_SelectingDataWithoutFilter()
         {
             //arrange            
             var repo = new ReadOnlyRepository<User, InMemContext>(_context);
@@ -66,11 +66,11 @@ namespace FrameworkRepository.Tests
         public void Should_ReturnTrue_When_SearchByValidID()
         {
             //arrange     
-            const int id = 3;
+            const int Id = 3;
             var repo = new ReadOnlyRepository<User, InMemContext>(_context);
 
             //act
-            var exists = repo.Exists(p => p.Id == id);
+            var exists = repo.Exists(p => p.Id == Id);
 
             //assert
             Assert.AreEqual(exists, true);
@@ -81,11 +81,11 @@ namespace FrameworkRepository.Tests
         public void Should_ReturnFalse_When_SearchByInvalidID()
         {
             //arrange     
-            const int id = 10;
+            const int Id = 10;
             var repo = new ReadOnlyRepository<User, InMemContext>(_context);
 
             //act
-            var exists = repo.Exists(p => p.Id == id);
+            var exists = repo.Exists(p => p.Id == Id);
 
             //assert
             Assert.AreEqual(exists, false);

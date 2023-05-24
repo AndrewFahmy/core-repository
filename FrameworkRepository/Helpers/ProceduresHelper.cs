@@ -22,8 +22,10 @@ namespace FrameworkRepository.Helpers
 
             for (var i = 0; i < parameters.Length; i++)
             {
-                if (parameters[i] == null ||
-                    !parameters[i].GetType().IsSubclassOf(typeof(DbParameter)))
+                if (
+                    parameters[i] == null
+                    || !parameters[i].GetType().IsSubclassOf(typeof(DbParameter))
+                )
                 {
                     var parameter = cmd.CreateParameter();
                     parameter.ParameterName = $"@p{i}";
@@ -55,52 +57,65 @@ namespace FrameworkRepository.Helpers
                     throw new Exception("Couldn't open a database connection.");
             }
 
-            if (connection.State != ConnectionState.Open) connection.Open();
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
         }
 
-
-        public static T GetScalar<T>(this DatabaseFacade database, string command, params object[] parameters)
+        public static T GetScalar<T>(
+            this DatabaseFacade database,
+            string command,
+            params object[] parameters
+        )
         {
             var con = database.GetDbConnection();
-            using (var cmd = con.CreateCommand())
-            {
-                cmd.CommandType = CommandType.Text;
-                var parameterNames = cmd.AddParameters(parameters);
 
-                cmd.CommandText = string.Format(command, parameterNames);
-                con.CheckConnectionState().Wait();
+            using var cmd = con.CreateCommand();
 
-                var result = cmd.ExecuteScalar();
+            cmd.CommandType = CommandType.Text;
+            var parameterNames = cmd.AddParameters(parameters);
 
-                return result == DBNull.Value || result == null ? default(T) : (T)result;
-            }
+            cmd.CommandText = string.Format(command, parameterNames);
+            con.CheckConnectionState().Wait();
+
+            var result = cmd.ExecuteScalar();
+
+            return result == DBNull.Value || result == null ? default(T) : (T)result;
         }
 
-        public static List<T> GetPrimitiveList<T>(this DatabaseFacade database, string command, params object[] parameters)
+        public static List<T> GetPrimitiveList<T>(
+            this DatabaseFacade database,
+            string command,
+            params object[] parameters
+        )
         {
             var list = new List<T>(10);
 
             var con = database.GetDbConnection();
-            using (var cmd = con.CreateCommand())
+            using var cmd = con.CreateCommand();
+
+            cmd.CommandType = CommandType.Text;
+            var parameterNames = cmd.AddParameters(parameters);
+
+            cmd.CommandText = string.Format(command, parameterNames);
+            con.CheckConnectionState().Wait();
+
+            var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                cmd.CommandType = CommandType.Text;
-                var parameterNames = cmd.AddParameters(parameters);
-
-                cmd.CommandText = string.Format(command, parameterNames);
-                con.CheckConnectionState().Wait();
-
-                var reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    list.Add((T)reader[0]);
-                }
-
-                return list;
+                list.Add((T)reader[0]);
             }
+
+            reader.Close();
+
+            return list;
         }
 
-        public static RawDataModel GetRawData(this DatabaseFacade database, string command, params object[] parameters)
+        public static RawDataModel GetRawData(
+            this DatabaseFacade database,
+            string command,
+            params object[] parameters
+        )
         {
             var result = new RawDataModel();
 
@@ -117,7 +132,10 @@ namespace FrameworkRepository.Helpers
 
                 var reader = cmd.ExecuteReader();
 
-                result.Headers = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
+                result.Headers = Enumerable
+                    .Range(0, reader.FieldCount)
+                    .Select(reader.GetName)
+                    .ToList();
 
                 while (reader.Read())
                 {
@@ -127,6 +145,8 @@ namespace FrameworkRepository.Helpers
 
                     result.Rows.Add(row);
                 }
+
+                reader.Close();
             }
 
             return result;
